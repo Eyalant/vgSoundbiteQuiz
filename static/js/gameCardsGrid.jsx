@@ -4,7 +4,7 @@ function GameCardsGrid({isForceRevealAllCards}) {
     useEffect(() => {
         async function getNumberOfQuestions() {
             if (!numOfQuestions) { // get them from server, store in localStorage
-                const resp = await fetch("ques");
+                const resp = await fetch("num-ques");
                 const quesObj = await resp.json();
                 setNumOfQuestions(quesObj.num);
                 localStorage.setItem("numOfQuestions", quesObj.num);
