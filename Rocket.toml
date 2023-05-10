@@ -1,0 +1,2 @@
+[default.databases.redis_db]
+url = "redis://default:3642067872834b08b08d38813e175af0@eu2-wondrous-hawk-31279.upstash.io:31279"
