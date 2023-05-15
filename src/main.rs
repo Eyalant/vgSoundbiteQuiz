@@ -36,7 +36,7 @@ fn rocket() -> _ {
         .attach(io::RedisPool::init())
         .mount("/", routes![index])
         .attach(Template::fairing())
-        .mount("/static", FileServer::from("static/"))
+        .mount("/public", FileServer::from("public/"))
         .mount("/templates", FileServer::from("templates/"))
         .mount("/num-ques", routes![num_questions])
         .mount(

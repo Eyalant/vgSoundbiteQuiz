@@ -1,6 +1,17 @@
-body {
-    background-color: black;
-}
+#logo {
+    margin-top: 0px;
+    object-fit: cover;
+    max-width: 650px;
+    max-height: 200px;
+}    
+
+#bg-vid {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
 
 @keyframes spin {
     from {
@@ -28,9 +39,15 @@ body {
     font-size: small;
 }
 
+.score-icon {
+    max-width: 30px;
+    max-height: 30px;
+    margin: 3%;
+}
+
 #landing-msg-card {
     border: 0px;
-    background-color: black;
+    background-color: transparent;
 }
 
 #game-cards-grid-container {
@@ -38,7 +55,7 @@ body {
     margin-bottom: 2%;
 }
 
-#summary-modal {
+#confirmation-modal, #summary-modal {
     width: fit-content;
 }
 
@@ -47,14 +64,26 @@ audio {
     max-width: 600px;
 }
 
-@media only screen and (min-width: 1025px) {
-    /* #landing-msg-card {
-        background-image: url("/static/pacman_galaxian.png");
-        background-repeat: no-repeat;
-    } */
+#info-bar {
+    font-size: small;
+}
 
-    body {
-        background-image: url("/static/pacman_latest.png");
-        
+.bar-icon {
+    margin: 5%;
+}
+
+@media only screen and (max-width: 1025px) {
+    [id^=game-card-] {
+        position: relative;
+        max-width: 290px;
+        height: 100%;
+        text-align: center;
     }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1600px) {
+    #info-bar {
+        font-size: small;
+        margin-inline-start: 70vw;
+    }    
 }

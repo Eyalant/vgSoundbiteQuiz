@@ -1,17 +1,21 @@
 <!doctype html>
 <html lang="he" dir="rtl" data-bs-theme="auto">
 
+<video autoplay muted loop id="bg-vid">
+  <source src="/public/assets/background.mp4" type="video/mp4">
+</video>
+
 <head>
-    <link rel="icon" href="/static/favicon.ico">
-    <script src="/static/assets/js/color-modes.js"></script>
+    <script src="/public/bootstrap/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>חידון קטעי קול ממשחקים</title>
-    <link href="/static/assets/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="/public/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" crossorigin></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/assets/favicon.ico?v=2" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -90,15 +94,18 @@
 
 <body>
     <div id="root"></div>
-    <script src="/static/assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/babel" src="/static/js/landingMessage.jsx"></script>
-    <script type="text/babel" src="/static/js/gameForm.jsx"></script>
-    <script type="text/babel" src="/static/js/gameDescription.jsx"></script>
-    <script type="text/babel" src="/static/js/gameCard.jsx"></script>
-    <script type="text/babel" src="/static/js/buttons.jsx"></script>
-    <script type="text/babel" src="/static/js/gameCardsGrid.jsx"></script>
-    <script type="text/babel" src="/static/js/summaryModal.jsx"></script>
-    <script type="text/babel" src="/static/js/app.jsx"></script>
+    <script src="/public/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/babel" src="/public/js/infoBar.jsx"></script>
+    <script type="text/babel" src="/public/js/landingMessage.jsx"></script>
+    <script type="text/babel" src="/public/js/gameForm.jsx"></script>
+    <script type="text/babel" src="/public/js/gameDescription.jsx"></script>
+    <script type="text/babel" src="/public/js/gameCard.jsx"></script>
+    <script type="text/babel" src="/public/js/buttons.jsx"></script>
+    <script type="text/babel" src="/public/js/gameCardsGrid.jsx"></script>
+    <script type="text/babel" src="/public/js/scoreIcons.jsx"></script>
+    <script type="text/babel" src="/public/js/confirmationModal.jsx"></script>
+    <script type="text/babel" src="/public/js/summaryModal.jsx"></script>
+    <script type="text/babel" src="/public/js/app.jsx"></script>
     <link href="/templates/index.css" rel="stylesheet">
 </body>
 
