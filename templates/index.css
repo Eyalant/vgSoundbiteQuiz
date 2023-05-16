@@ -38,6 +38,10 @@
     width: 100%;
 }
 
+#skip-ques-btn {
+    color: white;
+}
+
 .score-icon {
     max-width: 30px;
     max-height: 30px;
@@ -85,6 +89,12 @@ audio {
         font-size: small;
         margin-inline-start: 70vw;
     }    
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1600px) {
+    .body {
+        width:fit-content;
+    }
 }
 
 .bd-placeholder-img {

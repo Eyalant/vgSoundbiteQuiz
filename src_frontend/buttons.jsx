@@ -21,7 +21,7 @@ export function Buttons({ location, setForceRevealAllCards, doneBtnText, setDone
         <Container>
           <Navbar.Brand className="mx-auto">{' '}
             <Button href={getNavBtnLink(location)} variant="secondary">{getNavBtnText(location)}</Button>
-            <Button onClick={() => handleDoneBtn()} className="ms-3" variant="danger">{doneBtnText}</Button>
+            <Button onClick={() => handleDoneBtn()} className="ms-3" variant="success">{doneBtnText}</Button>
             <ConfirmationModal confModalState={confModalState} setConfModalState={setConfModalState} setShowSummaryModal={setShowSummaryModal} />
             <SummaryModal showSummaryModal={showSummaryModal} setShowSummaryModal={setShowSummaryModal}
               setForceRevealAllCards={setForceRevealAllCards}

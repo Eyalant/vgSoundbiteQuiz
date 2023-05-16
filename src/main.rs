@@ -5,6 +5,7 @@ extern crate dotenv;
 extern crate rocket;
 use rocket::fs::FileServer;
 use rocket::http::{Cookie, CookieJar};
+use rocket::response::Redirect;
 use rocket::serde::{json::Json, Serialize};
 use rocket::State;
 use rocket_db_pools::Database;
@@ -25,7 +26,7 @@ struct ScoreResp {
 #[launch]
 fn rocket() -> _ {
     dotenv().ok();
-    // io::store_answers_in_redis().expect("Could not store answers in Redis.");
+    io::store_answers_in_redis().expect("Could not store answers in Redis.");
     let num = io::get_num_of_questions_from_redis();
     if num <= 0 {
         eprintln!("There were no questions to load from redis.");
@@ -34,7 +35,7 @@ fn rocket() -> _ {
     rocket::build()
         .manage(num)
         .attach(io::RedisPool::init())
-        .mount("/", routes![index])
+        .mount("/", routes![index, get_favicon])
         .attach(Template::fairing())
         .mount("/public", FileServer::from("public/"))
         .mount("/templates", FileServer::from("templates/"))
@@ -70,4 +71,10 @@ async fn score(cookies: &CookieJar<'_>) -> Json<ScoreResp> {
         .parse()
         .unwrap();
     Json(ScoreResp { score })
+}
+
+#[get("/favicon.ico")]
+/// A favicon redirect
+async fn get_favicon() -> Redirect {
+    Redirect::to(uri!("/public/assets/favicon.ico"))
 }

@@ -78,10 +78,10 @@ export function GameCard({ ques, isForceRevealAllCards }) {
             <Card.Img id={`img-id-${ques}`} style={imgStyle} variant="top" src={imgSrc} />
             <Card.Body>
                 <Card.Title>קטע #{_getQuesNumFromStr(ques)}</Card.Title>
-                <audio controls src={`/public/questions_audio/${ques}.mp3`}></audio>
+                <audio controls preload="none" controlsList="nodownload noplaybackrate" src={`/public/questions_audio/${ques}.mp3`}></audio>
                 <GameForm id={ques} updateGameCard={updateGameCard} cardState={cardState} setCardState={setCardState} />
                 <GameDescription release_info={cardState.relInfo} description={cardState.description} />
-                <Button onClick={forceRevealCard} className={`ms-3 ${cardState.showRevealAnsBtn}`} variant="outline-danger">חשוף תשובה</Button>
+                <Button id="skip-ques-btn" onClick={forceRevealCard} className={`mx-auto ${cardState.showRevealAnsBtn}`} variant="outline-danger">וותר וחשוף תשובה</Button>
             </Card.Body>
         </Card>
     )
