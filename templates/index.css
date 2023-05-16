@@ -25,11 +25,11 @@
 
 @-webkit-keyframes spin {
     from {
-        transform: rotateY(0turn);
+        -webkit-transform: rotateY(0turn);
     }
 
     to {
-        transform: rotateY(1turn);
+        -webkit-transform: rotateY(1turn);
     }
 }
 
