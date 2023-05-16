@@ -23,6 +23,16 @@
     }
 }
 
+@-webkit-keyframes spin {
+    from {
+        transform: rotateY(0turn);
+    }
+
+    to {
+        transform: rotateY(1turn);
+    }
+}
+
 [id^=game-card-] {
     position: relative;
     width: 100%;
