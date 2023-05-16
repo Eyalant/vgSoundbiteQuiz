@@ -31,12 +31,11 @@
 }
 
 [id^=img-id-] {
-    height: 160px;
+    height: 150px;
 }
 
 [id^=game-form-] {
     width: 100%;
-    font-size: small;
 }
 
 .score-icon {
