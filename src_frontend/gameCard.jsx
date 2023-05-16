@@ -81,7 +81,7 @@ export function GameCard({ ques, isForceRevealAllCards }) {
                 <audio controls preload="none" controlsList="nodownload noplaybackrate" src={`/public/questions_audio/${ques}.mp3`}></audio>
                 <GameForm id={ques} updateGameCard={updateGameCard} cardState={cardState} setCardState={setCardState} />
                 <GameDescription release_info={cardState.relInfo} description={cardState.description} />
-                <Button id="skip-ques-btn" onClick={forceRevealCard} className={`mx-auto ${cardState.showRevealAnsBtn}`} variant="outline-danger">וותר וחשוף תשובה</Button>
+                <Button id="skip-ques-btn" onClick={forceRevealCard} className={`mx-auto ${cardState.showRevealAnsBtn}`} variant="outline-danger">ותר וחשוף תשובה</Button>
             </Card.Body>
         </Card>
     )
