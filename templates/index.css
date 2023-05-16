@@ -24,13 +24,13 @@
 }
 
 @-webkit-keyframes spin {
-    from {
+    /* from {
         -webkit-transform: rotateY(0turn);
     }
 
     to {
         -webkit-transform: rotateY(1turn);
-    }
+    } */
 }
 
 [id^=game-card-] {
