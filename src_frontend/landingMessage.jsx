@@ -1,4 +1,7 @@
-function LandingMessage() {
+import React from "react";
+import { Card } from "react-bootstrap";
+
+export function LandingMessage() {
     return (
         <Card id="landing-msg-card" className="text-white text-center">
             <br />

@@ -1,4 +1,9 @@
-function Buttons({ location, setForceRevealAllCards, doneBtnText, setDoneBtnText, numOfQuestions }) {
+import React, { useState } from "react";
+import { Navbar, Container, Button } from "react-bootstrap";
+import { SummaryModal } from './summaryModal.jsx';
+import { ConfirmationModal } from './confirmationModal.jsx';
+
+export function Buttons({ location, setForceRevealAllCards, doneBtnText, setDoneBtnText, numOfQuestions }) {
   const [confModalState, setConfModalState] = useState({ "show": false, "isSolved": false });
   const [showSummaryModal, setShowSummaryModal] = useState(false);
 

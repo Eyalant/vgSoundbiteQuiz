@@ -1,4 +1,7 @@
-function ConfirmationModal({ confModalState, setConfModalState, setShowSummaryModal }) {
+import React from "react";
+import { Container, Modal, Button } from "react-bootstrap";
+
+export function ConfirmationModal({ confModalState, setConfModalState, setShowSummaryModal }) {
     const handleClose = () => setConfModalState({ ...confModalState, "show": false });
     return (
         <Modal

@@ -1,4 +1,6 @@
-function ScoreIcons({ score, numOfQuestions }) {
+import React from "react";
+
+export function ScoreIcons({ score, numOfQuestions }) {
   function getNumOfGoldCoins() {
     switch (score) {
       case 0:

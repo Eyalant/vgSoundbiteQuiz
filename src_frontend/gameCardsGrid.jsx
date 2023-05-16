@@ -1,4 +1,8 @@
-function GameCardsGrid({numOfQuestions, isForceRevealAllCards}) {
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { GameCard } from './gameCard.jsx';
+
+export function GameCardsGrid({numOfQuestions, isForceRevealAllCards}) {
     return (
         <Container id="game-cards-grid-container">
             <Row xs={1} md={4} className="g-2">

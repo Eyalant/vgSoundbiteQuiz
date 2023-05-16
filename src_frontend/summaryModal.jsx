@@ -1,4 +1,8 @@
-function SummaryModal({ showSummaryModal, setShowSummaryModal, setForceRevealAllCards, setDoneBtnText, numOfQuestions }) {
+import React, { useState } from "react";
+import { Modal, Container, Button } from "react-bootstrap";
+import { ScoreIcons } from './scoreIcons.jsx';
+
+export function SummaryModal({ showSummaryModal, setShowSummaryModal, setForceRevealAllCards, setDoneBtnText, numOfQuestions }) {
   const handleClose = () => setShowSummaryModal(false);
   const [score, setScore] = useState(0);
   const [revealAllBtnState, setRevealAllBtnState] = useState({ "isSolved": false, "text": "חזור וחשוף תשובות", "variant": "info" });

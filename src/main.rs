@@ -51,7 +51,6 @@ fn rocket() -> _ {
 async fn index(cookies: &CookieJar<'_>) -> Template {
     cookies.add_private(Cookie::new("score", 0.to_string()));
     let mut context: BTreeMap<&str, Vec<String>> = BTreeMap::new(); // in case I'd need it
-                                                                    // context.insert("some_key", some_val);
     Template::render("index", &context)
 }
 

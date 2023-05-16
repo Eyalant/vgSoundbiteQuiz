@@ -1,4 +1,7 @@
-function GameForm({ id, updateGameCard, cardState, setCardState }) {
+import React, { useEffect } from "react";
+import { Form } from "react-bootstrap";
+
+export function GameForm({ id, updateGameCard, cardState, setCardState }) {
     const waitTimeForMoreInput = 250;
     const checkUserInput = async (route) => {
         if (!cardState.gameName || cardState.isSolved) return;

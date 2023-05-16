@@ -1,6 +1,11 @@
-const root = ReactDOM.createRoot(document.getElementById('root'));
-const { useState, useEffect } = React;
-var { Card, Button, Col, Row, Container, Form, Navbar, Modal, Popover, OverlayTrigger } = ReactBootstrap;
+import { createRoot } from "react-dom/client";
+import React, { useState, useEffect } from "react";
+import { LandingMessage } from './landingMessage.jsx';
+import { Buttons } from './buttons.jsx';
+import { GameCardsGrid } from './gameCardsGrid.jsx';
+import { InfoBar } from './infoBar.jsx';
+
+const root = createRoot(document.getElementById('root'));
 
 function App() {
     const [numOfQuestions, setNumOfQuestions] = useState(getInitialState());
@@ -39,7 +44,7 @@ function App() {
                 numOfQuestions={numOfQuestions} />
             <a id="bottom"></a>
             <br />
-            <InfoBar id="info-bar" />
+            <InfoBar />
         </>
     );
 }

@@ -1,4 +1,9 @@
-function GameCard({ ques, isForceRevealAllCards }) {
+import React, { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
+import { GameDescription } from './gameDescription.jsx';
+import { GameForm } from './gameForm.jsx';
+
+export function GameCard({ ques, isForceRevealAllCards }) {
     const [imgSrc, setImgSrc] = useState("/public/assets/mario_ques_block.webp");
     const [imgStyle, setImgStyle] = useState({});
     const [cardState, setCardState] = useState({
