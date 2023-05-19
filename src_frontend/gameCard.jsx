@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { GameDescription } from './gameDescription.jsx';
 import { GameForm } from './gameForm.jsx';
+import { SkipQuesBtn } from "./skipQuesBtn.jsx";
 
 export function GameCard({ ques, isForceRevealAllCards }) {
     const [imgSrc, setImgSrc] = useState("/public/assets/mario_ques_block.webp");
     const [imgStyle, setImgStyle] = useState({});
     const [cardState, setCardState] = useState({
         isSolved: false, gameName: "", description: "", relInfo: "", isGameFormDisabled: false,
-        showRevealAnsBtn: "visible"
+        showSkipQuesBtn: "visible"
     });
+
 
     const updateGameCard = async (route, req) => {
         const raw_resp = await _fetchRawRespFromServer(route, req);
@@ -20,7 +22,7 @@ export function GameCard({ ques, isForceRevealAllCards }) {
                 if (resp.possible_answers.length) {
                     setCardState({
                         isSolved: true, gameName: resp.possible_answers[0], description: resp.description, relInfo: `(${resp.release_year}, ${resp.release_plat})`,
-                        isGameFormDisabled: true, showRevealAnsBtn: "invisible"
+                        isGameFormDisabled: true, showSkipQuesBtn: "invisible"
                     });
                     await updateGameCard("/ans/img", req);
                 }
@@ -56,7 +58,7 @@ export function GameCard({ ques, isForceRevealAllCards }) {
     };
 
     async function forceRevealCard() {
-        setCardState({...cardState, isSolved: true, showRevealAnsBtn: "invisible"});
+        setCardState({ ...cardState, isSolved: true, showSkipQuesBtn: "invisible" });
         const question_number = _getQuesNumFromStr(ques);
         const req = { "force": true, "q_num": question_number, "userans": "" };
         await updateGameCard("/ans", req);
@@ -81,7 +83,7 @@ export function GameCard({ ques, isForceRevealAllCards }) {
                 <audio controls preload="none" controlsList="nodownload noplaybackrate" src={`/public/questions_audio/${ques}.mp3`}></audio>
                 <GameForm id={ques} updateGameCard={updateGameCard} cardState={cardState} setCardState={setCardState} />
                 <GameDescription release_info={cardState.relInfo} description={cardState.description} />
-                <Button id="skip-ques-btn" onClick={forceRevealCard} className={`mx-auto ${cardState.showRevealAnsBtn}`} variant="outline-danger">ותר וחשוף תשובה</Button>
+                <SkipQuesBtn onConfirmAfterthought={forceRevealCard} className={`mx-auto ${cardState.showSkipQuesBtn}`} />
             </Card.Body>
         </Card>
     )

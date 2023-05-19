@@ -1,7 +1,9 @@
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect } from "react";
+import { Navbar, Container } from "react-bootstrap";
 import { LandingMessage } from './landingMessage.jsx';
-import { Buttons } from './buttons.jsx';
+import { DoneBtn } from "./doneBtn.jsx";
+import { PageNavBtn } from './pageNavBtn.jsx';
 import { GameCardsGrid } from './gameCardsGrid.jsx';
 import { InfoBar } from './infoBar.jsx';
 
@@ -10,7 +12,6 @@ const root = createRoot(document.getElementById('root'));
 function App() {
     const [numOfQuestions, setNumOfQuestions] = useState(getInitialState());
     const [isForceRevealAllCards, setForceRevealAllCards] = useState(false);
-    const [doneBtnText, setDoneBtnText] = useState("סיימתי!");
 
     useEffect(() => {
         async function getNumberOfQuestions() {
@@ -30,18 +31,16 @@ function App() {
     return (
         <>
             <LandingMessage />
-            <Buttons
-                location={"beginning"}
-                setForceRevealAllCards={setForceRevealAllCards}
-                doneBtnText={doneBtnText}
-                setDoneBtnText={setDoneBtnText}
-                numOfQuestions={numOfQuestions} />
             <GameCardsGrid numOfQuestions={numOfQuestions} isForceRevealAllCards={isForceRevealAllCards} />
-            <Buttons location={"end"}
-                setForceRevealAllCards={setForceRevealAllCards}
-                doneBtnText={doneBtnText}
-                setDoneBtnText={setDoneBtnText}
-                numOfQuestions={numOfQuestions} />
+            <PageNavBtn location="end" />
+            <Navbar className="buttons">
+                <Container>
+                    <Navbar.Brand className="mx-auto">
+                        <PageNavBtn location="end" asIcon={true}></PageNavBtn>
+                        <DoneBtn setForceRevealAllCards={setForceRevealAllCards} numOfQuestions={numOfQuestions} />
+                    </Navbar.Brand>
+                </Container>
+            </Navbar>
             <a id="bottom"></a>
             <br />
             <InfoBar />

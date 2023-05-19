@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Modal, Button } from "react-bootstrap";
 
-export function ConfirmationModal({ confModalState, setConfModalState, setShowSummaryModal }) {
+export function ConfirmationModal({ confModalState, setConfModalState }) {
     const handleClose = () => setConfModalState({ ...confModalState, "show": false });
     return (
         <Modal
@@ -11,16 +11,15 @@ export function ConfirmationModal({ confModalState, setConfModalState, setShowSu
             backdrop="static"
             keyboard={false}
         >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <p className="fw-bold text-center">
-                    לסכום את הניקוד ולסיים את המשחק?<br />
-                    אין אפשרות לענות על שאלות לאחר מכן!
+                    {confModalState.text}
                 </p>
             </Modal.Header>
             <Modal.Body>
                 <Container className="text-center">
-                    <Button className="ms-3" variant="info" onClick={() => handleClose()}>בוא נחזור</Button>
-                    <Button className="ms-3" variant="danger" onClick={() => { setConfModalState({ "show": false, "isSolved": true }); setShowSummaryModal(true); }}>כן, יאללה!</Button>
+                    <Button className="ms-3" variant={confModalState.returnBtnVariant} onClick={() => handleClose()}>בוא נחזור</Button>
+                    <Button className="ms-3" variant="danger" onClick={confModalState.onConfirm}>כן, יאללה!</Button>
                 </Container>
             </Modal.Body>
         </Modal>
