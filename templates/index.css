@@ -3,7 +3,7 @@
     object-fit: cover;
     max-width: 650px;
     max-height: 200px;
-}    
+}
 
 #bg-vid {
     position: fixed;
@@ -11,7 +11,7 @@
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
-  }
+}
 
 @keyframes spin {
     from {
@@ -59,7 +59,7 @@
     margin-bottom: 2%;
 }
 
-#confirmation-modal, #summary-modal {
+#summary-modal {
     width: fit-content;
 }
 
@@ -103,16 +103,16 @@ audio {
     }
 }
 
+@media only screen and (min-width: 1025px) {
+    #confirmation-modal {
+        width: fit-content;
+    }
+}
+
 @media only screen and (min-width: 1025px) and (max-width: 1600px) {
     #info-bar {
         font-size: small;
         margin-inline-start: 70vw;
-    }    
-}
-
-@media only screen and (min-width: 1025px) and (max-width: 1600px) {
-    .body {
-        width:fit-content;
     }
 }
 

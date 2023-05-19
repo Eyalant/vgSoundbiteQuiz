@@ -5,13 +5,13 @@ export function ConfirmationModal({ confModalState, setConfModalState }) {
     const handleClose = () => setConfModalState({ ...confModalState, "show": false });
     return (
         <Modal
-            id="confirmation-modal" size="lg" centered
+            id="confirmation-modal" centered
             show={confModalState.show}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
         >
-            <Modal.Header>
+            <Modal.Header className="mx-auto">
                 <p className="fw-bold text-center">
                     {confModalState.text}
                 </p>
