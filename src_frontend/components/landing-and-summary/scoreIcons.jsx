@@ -23,10 +23,10 @@ export function ScoreIcons({ score, numOfQuestions }) {
   const goldenCoins = getNumOfGoldCoins();
   let scoreIcons = [];
   for (let i = 0; i < (5 - goldenCoins); i++) {
-    scoreIcons.push(<img src="/public/assets/si_score_grey.png" className="score-icon" />)
+    scoreIcons.push(<img role="score-icon-grey" key={`score-icon-grey-${i}`} src="/public/assets/si_score_grey.png" className="score-icon" />)
   };
   for (let i = 0; i < goldenCoins; i++) {
-    scoreIcons.push(<img src="/public/assets/si_score.png" className="score-icon" />);
+    scoreIcons.push(<img role="score-icon-golden" key={`score-icon-golden-${i}`} src="/public/assets/si_score.png" className="score-icon" />);
   }
   return scoreIcons;
 };

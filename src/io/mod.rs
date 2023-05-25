@@ -1,3 +1,6 @@
+#[cfg(test)]
+mod tests;
+
 use redis::{Commands, RedisError};
 use rocket_db_pools::{deadpool_redis, Database};
 use serde::{Deserialize, Serialize};
@@ -9,7 +12,7 @@ use std::env::var;
 #[database("redis_db")]
 pub struct RedisPool(deadpool_redis::Pool);
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Answer {
     pub possible_answers: Vec<String>,
     pub description: String,

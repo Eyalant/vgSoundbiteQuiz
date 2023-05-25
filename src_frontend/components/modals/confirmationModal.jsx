@@ -18,8 +18,8 @@ export function ConfirmationModal({ confModalState, setConfModalState }) {
             </Modal.Header>
             <Modal.Body>
                 <Container className="text-center">
-                    <Button className="ms-3" variant={confModalState.returnBtnVariant} onClick={() => handleClose()}>בוא נחזור</Button>
-                    <Button className="ms-3" variant="danger" onClick={confModalState.onConfirm}>כן, יאללה!</Button>
+                    <Button data-testid="do-not-confirm-btn" className="ms-3" variant={confModalState.returnBtnVariant} onClick={() => handleClose()}>בוא נחזור</Button>
+                    <Button data-testid="confirm-btn" className="ms-3" variant="danger" onClick={confModalState.onConfirm}>כן, יאללה!</Button>
                 </Container>
             </Modal.Body>
         </Modal>

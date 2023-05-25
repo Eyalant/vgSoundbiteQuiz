@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { ConfirmationModal } from './confirmationModal.jsx';
+import { ConfirmationModal } from '../modals/confirmationModal.jsx';
 
 export function SkipQuesBtn({ onConfirmAfterthought, className }) {
     const [skipQuesConfModalState, setSkipQuesConfModalState] = useState({

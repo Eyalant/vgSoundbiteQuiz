@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { GameDescription } from './gameDescription.jsx';
 import { GameForm } from './gameForm.jsx';
-import { SkipQuesBtn } from "./skipQuesBtn.jsx";
+import { SkipQuesBtn } from "../buttons/skipQuesBtn.jsx";
 
 export function GameCard({ ques, isForceRevealAllCards }) {
     const [imgSrc, setImgSrc] = useState("/public/assets/mario_ques_block.webp");
@@ -76,8 +76,8 @@ export function GameCard({ ques, isForceRevealAllCards }) {
     }, [isForceRevealAllCards]);
 
     return (
-        <Card id={`game-card-${ques}`} className="mx-auto bg-grey">
-            <Card.Img id={`img-id-${ques}`} style={imgStyle} variant="top" src={imgSrc} />
+        <Card data-testid={`game-card-${ques}`} id={`game-card-${ques}`} className="mx-auto bg-grey">
+            <Card.Img data-testid={`img-id-${ques}`} id={`img-id-${ques}`} style={imgStyle} variant="top" src={imgSrc} />
             <Card.Body>
                 <Card.Title>קטע #{_getQuesNumFromStr(ques)}</Card.Title>
                 <audio controls preload="none" controlsList="nodownload noplaybackrate" src={`/public/questions_audio/${ques}.mp3`}></audio>

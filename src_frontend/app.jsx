@@ -1,15 +1,16 @@
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect } from "react";
 import { Navbar, Container } from "react-bootstrap";
-import { LandingMessage } from './landingMessage.jsx';
-import { DoneBtn } from "./doneBtn.jsx";
-import { PageNavBtn } from './pageNavBtn.jsx';
-import { GameCardsGrid } from './gameCardsGrid.jsx';
-import { InfoBar } from './infoBar.jsx';
+import { LandingMessage } from './components/landing-and-summary/landingMessage.jsx';
+import { DoneBtn } from "./components/buttons/doneBtn.jsx";
+import { PageNavBtn } from './components/buttons/pageNavBtn.jsx';
+import { GameCardsGrid } from './components/game-card/gameCardsGrid.jsx';
+import { InfoBar } from './components/bars/infoBar.jsx'
 
-const root = createRoot(document.getElementById('root'));
+const elem = document.getElementById("root") || document.createElement("div");
+const root = createRoot(elem);
 
-function App() {
+export function App() {
     const [numOfQuestions, setNumOfQuestions] = useState(getInitialState());
     const [isForceRevealAllCards, setForceRevealAllCards] = useState(false);
 

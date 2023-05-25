@@ -1,3 +1,4 @@
+#[cfg(test)] mod tests;
 mod ans_handler;
 mod io;
 extern crate dotenv;
@@ -10,15 +11,16 @@ use rocket::serde::{json::Json, Serialize};
 use rocket::State;
 use rocket_db_pools::Database;
 use rocket_dyn_templates::Template;
+use serde::Deserialize;
 use std::collections::BTreeMap;
 use dotenv::dotenv;
 
-#[derive(Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 struct NumOfQuestions {
     num: i32,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 struct ScoreResp {
     score: i32,
 }
@@ -26,7 +28,7 @@ struct ScoreResp {
 #[launch]
 fn rocket() -> _ {
     dotenv().ok();
-    io::store_answers_in_redis().expect("Could not store answers in Redis.");
+    // io::store_answers_in_redis().expect("Could not store answers in Redis.");
     let num = io::get_num_of_questions_from_redis();
     if num <= 0 {
         eprintln!("There were no questions to load from redis.");

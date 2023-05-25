@@ -5,10 +5,11 @@ export function LandingMessage() {
     return (
         <Card id="landing-msg-card" className="text-white text-center">
             <br />
-            <Card.Img id="logo" className="mx-auto" src="/public/assets/logo.png" />
+            <Card.Img data-testid="logo" id="logo" className="mx-auto" src="/public/assets/logo.png" />
             <Card.Body>
                 <Card.Text className="lead text-white">
-                    <p className="fw-bold">ברוכות הבאות וברוכים הבאים!</p>
+                    <span className="fw-bold">ברוכות הבאות וברוכים הבאים!</span>
+                    <br />
                     לפניכם/ן 100 קטעי קול קצרצרים ממשחקים מפורסמים
                     בהיסטוריה. חלקם הם אפקטים קוליים, חלקם נעימות רקע
                     מוכרות וחלקם ציטוטים נבחרים.

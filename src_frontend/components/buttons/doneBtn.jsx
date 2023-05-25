@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { SummaryModal } from './summaryModal.jsx';
-import { ConfirmationModal } from './confirmationModal.jsx';
+import { SummaryModal } from '../modals/summaryModal.jsx';
+import { ConfirmationModal } from '../modals/confirmationModal.jsx';
 
 export function DoneBtn({ setForceRevealAllCards, numOfQuestions }) {
   const [showSummaryModal, setShowSummaryModal] = useState(false);
@@ -24,7 +24,7 @@ export function DoneBtn({ setForceRevealAllCards, numOfQuestions }) {
 
   return (
     <>
-      <Button id="done-btn" onClick={() => handleDoneBtn()} className="ms-3" size="lg" variant="success">{doneBtnText}</Button>
+      <Button data-testid="done-btn" id="done-btn" onClick={() => handleDoneBtn()} className="ms-3" size="lg" variant="success">{doneBtnText}</Button>
       <ConfirmationModal confModalState={doneConfModalState} setConfModalState={setDoneConfModalState} />
       <SummaryModal showSummaryModal={showSummaryModal} setShowSummaryModal={setShowSummaryModal}
         setForceRevealAllCards={setForceRevealAllCards}
