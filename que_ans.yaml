@@ -278,7 +278,7 @@ q30:
     - "COD MW"
     - "COD MW2"
     - "MW2"
-  description: "זהו המשפט המפורסם מתוך המשימה הנודעת לשמצה בעלת אותו השם:
+  description: "זהו המשפט המפורסם מתוך המשימה הארורה הנושאת את אותו השם:
    זו שמאפשרת לטבוח באזרחים חפים מפשע בנמל תעופה. הרימאסטר
     של המשחק כבר מאפשר לדלג עליה לחלוטין."
   release_year: "2009"
@@ -653,7 +653,7 @@ q70:
     - "GTA"
     - "Grand Theft Auto"
     - "San Andreas"
-  description: "זוהי כמובן משימת הרכבת הידועה לשמצה מ-GTA SA."
+  description: "זוהי כמובן משימת הרכבת המושמצת מ-GTA SA."
   release_year: "2004"
   release_plat: "פלייסטיישן 2"
 q71:
@@ -840,7 +840,7 @@ q93:
     - "Counter Strike 1.6"
     - "Counter Strike GO"
   description: "הצליל הזה כנראה צרוב במוחו של כל
-    שחקני/ות קאונטר-סטרייק, יחד עם 'Fire in the Hole'!"
+    שחקני/ת קאונטר-סטרייק, יחד עם 'Fire in the Hole'!"
   release_year: "2000"
   release_plat: "מחשב"
 q94:
