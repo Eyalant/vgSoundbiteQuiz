@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { SummaryModal } from '../modals/summaryModal.jsx';
 import { ConfirmationModal } from '../modals/confirmationModal.jsx';
 
-export function DoneBtn({ setForceRevealAllCards, numOfQuestions }) {
+export function DoneBtn({ setForceRevealAllCards, numOfQuestions, setLandingMessage }) {
   const [showSummaryModal, setShowSummaryModal] = useState(false);
   const [doneBtnText, setDoneBtnText] = useState("סיימתי! סכום את הניקוד שלי וחשוף את כל התשובות");
   const [doneConfModalState, setDoneConfModalState] = useState({
@@ -26,9 +26,13 @@ export function DoneBtn({ setForceRevealAllCards, numOfQuestions }) {
     <>
       <Button data-testid="done-btn" id="done-btn" onClick={() => handleDoneBtn()} className="ms-3" size="lg" variant="success">{doneBtnText}</Button>
       <ConfirmationModal confModalState={doneConfModalState} setConfModalState={setDoneConfModalState} />
-      <SummaryModal showSummaryModal={showSummaryModal} setShowSummaryModal={setShowSummaryModal}
+      <SummaryModal
+        showSummaryModal={showSummaryModal}
+        setShowSummaryModal={setShowSummaryModal}
         setForceRevealAllCards={setForceRevealAllCards}
-        setDoneBtnText={setDoneBtnText} numOfQuestions={numOfQuestions} />
+        setDoneBtnText={setDoneBtnText}
+        setLandingMessage={setLandingMessage}
+        numOfQuestions={numOfQuestions} />
     </>
   );
 }

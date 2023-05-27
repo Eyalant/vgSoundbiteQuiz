@@ -39,7 +39,7 @@
     width: 100%;
 }
 
-#skip-ques-btn {
+[role=skip-ques-btn] {
     color: white;
 }
 

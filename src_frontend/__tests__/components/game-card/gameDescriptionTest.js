@@ -6,7 +6,7 @@ import { GameDescription } from '../../../components/game-card/gameDescription.j
 
 describe("unit", () => {
     beforeEach(async () => {
-        render(<GameDescription release_info="some_info" description="some_description" />);
+        render(<GameDescription releaseInfo="some_info" description="some_description" />);
     });
 
     it("should load and display the game description", async () => {

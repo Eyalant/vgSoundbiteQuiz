@@ -4,7 +4,7 @@ import { GameDescription } from './gameDescription.jsx';
 import { GameForm } from './gameForm.jsx';
 import { SkipQuesBtn } from "../buttons/skipQuesBtn.jsx";
 
-export function GameCard({ ques, isForceRevealAllCards }) {
+export function GameCard({ ques, isForceReveal }) {
     const [imgSrc, setImgSrc] = useState("/public/assets/mario_ques_block.webp");
     const [imgStyle, setImgStyle] = useState({});
     const [cardState, setCardState] = useState({
@@ -19,9 +19,15 @@ export function GameCard({ ques, isForceRevealAllCards }) {
         switch (route) {
             case "/ans":
                 resp = await raw_resp.json();
+                if (resp.possible_answers === undefined) {
+                    return;
+                }
                 if (resp.possible_answers.length) {
                     setCardState({
-                        isSolved: true, gameName: resp.possible_answers[0], description: resp.description, relInfo: `(${resp.release_year}, ${resp.release_plat})`,
+                        isSolved: true,
+                        gameName: resp.possible_answers[0],
+                        description: resp.description,
+                        relInfo: `(${resp.release_year}, ${resp.release_plat})`,
                         isGameFormDisabled: true, showSkipQuesBtn: "invisible"
                     });
                     await updateGameCard("/ans/img", req);
@@ -31,7 +37,7 @@ export function GameCard({ ques, isForceRevealAllCards }) {
                 resp = await raw_resp.blob();
                 const imgURL = URL.createObjectURL(resp);
                 const flip = new Audio("public/assets/flip.m4a");
-                if (isForceRevealAllCards) {
+                if (isForceReveal) {
                     setImgSrc(imgURL);
                 } else {
                     setTimeout(setImgSrc, 1350, imgURL);
@@ -57,7 +63,7 @@ export function GameCard({ ques, isForceRevealAllCards }) {
         return raw_resp;
     };
 
-    async function forceRevealCard() {
+    async function doForceRevealCard() {
         setCardState({ ...cardState, isSolved: true, showSkipQuesBtn: "invisible" });
         const question_number = _getQuesNumFromStr(ques);
         const req = { "force": true, "q_num": question_number, "userans": "" };
@@ -69,21 +75,24 @@ export function GameCard({ ques, isForceRevealAllCards }) {
     }
 
     useEffect(() => {
-        const revealAllCards = async () => {
-            if (isForceRevealAllCards) await forceRevealCard();
+        const forceReveal = async () => {
+            if (isForceReveal) await doForceRevealCard();
         }
-        revealAllCards();
-    }, [isForceRevealAllCards]);
+        forceReveal();
+    }, [isForceReveal]);
 
     return (
         <Card data-testid={`game-card-${ques}`} id={`game-card-${ques}`} className="mx-auto bg-grey">
             <Card.Img data-testid={`img-id-${ques}`} id={`img-id-${ques}`} style={imgStyle} variant="top" src={imgSrc} />
             <Card.Body>
                 <Card.Title>קטע #{_getQuesNumFromStr(ques)}</Card.Title>
-                <audio controls preload="none" controlsList="nodownload noplaybackrate" src={`/public/questions_audio/${ques}.mp3`}></audio>
+                <audio controls
+                    preload="none"
+                    controlsList="nodownload noplaybackrate"
+                    src={`/public/questions_audio/${ques}.mp3`}></audio>
                 <GameForm id={ques} updateGameCard={updateGameCard} cardState={cardState} setCardState={setCardState} />
-                <GameDescription release_info={cardState.relInfo} description={cardState.description} />
-                <SkipQuesBtn onConfirmAfterthought={forceRevealCard} className={`mx-auto ${cardState.showSkipQuesBtn}`} />
+                <GameDescription releaseInfo={cardState.relInfo} description={cardState.description} />
+                <SkipQuesBtn onConfirm={doForceRevealCard} className={`mx-auto ${cardState.showSkipQuesBtn}`} />
             </Card.Body>
         </Card>
     )

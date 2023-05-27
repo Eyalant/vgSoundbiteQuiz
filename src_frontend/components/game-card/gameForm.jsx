@@ -21,7 +21,7 @@ export function GameForm({ id, updateGameCard, cardState, setCardState }) {
     }
 
     return (
-        <Form.Control className="mx-auto text-center" id={`game-form-${id}`}
+        <Form.Control className="mx-auto text-center" data-testid={`game-form-${id}`} id={`game-form-${id}`}
             onChange={evt => handleChange(evt)} placeholder="המשחק הזה הוא..."
             value={cardState.gameName} disabled={cardState.isGameFormDisabled} />
     )

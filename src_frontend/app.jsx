@@ -13,6 +13,27 @@ const root = createRoot(elem);
 export function App() {
     const [numOfQuestions, setNumOfQuestions] = useState(getInitialState());
     const [isForceRevealAllCards, setForceRevealAllCards] = useState(false);
+    const [landingMessage, setLandingMessage] = useState(
+        <>
+            <span className="fw-bold">ברוכות הבאות וברוכים הבאים!</span>
+            <br />
+            לפניכם/ן 100 קטעי קול קצרצרים ממשחקים מפורסמים
+            בהיסטוריה. חלקם הם אפקטים קוליים, חלקם נעימות רקע
+            מוכרות וחלקם ציטוטים נבחרים.
+            <br /><br />
+            אם זיהיתם/ן משחק,
+            פשוט הקלידו את שמו באנגלית (גם שם הסדרה זה בסדר).
+            אם התשובה נכונה, המשחק ייחשף והניקוד יתעדכן.
+            <br />
+            לא חייבים לענות על הכל בישיבה אחת, הנתונים נשמרים.
+            <br /><br />
+            אם אתם/ן מתקשים/ות בשאלה מסוימת וסקרנים/ות לגבי התשובה, אפשר לוותר על הניקוד שלה ולחשוף את התשובה מיידית.
+            <br />
+            כשתסיימו, כדי לסכום את הניקוד ולחשוף בבת אחת את התשובות לכל השאלות, לחצו על "סיימתי!" בתחתית הדף.
+            <br /><br />
+            בהצלחה &#128151;
+        </>
+    );
 
     useEffect(() => {
         async function getNumberOfQuestions() {
@@ -20,25 +41,28 @@ export function App() {
                 const resp = await fetch("num-ques");
                 const quesObj = await resp.json();
                 setNumOfQuestions(quesObj.num);
-                localStorage.setItem("numOfQuestions", quesObj.num);
+                localStorage.setItem("num-of-questions", quesObj.num);
             }
         } getNumberOfQuestions();
     }, []);
 
     function getInitialState() {
-        return localStorage.getItem("numOfQuestions");
+        return localStorage.getItem("num-of-questions");
     }
 
     return (
         <>
-            <LandingMessage />
+            <LandingMessage message={landingMessage} />
             <GameCardsGrid numOfQuestions={numOfQuestions} isForceRevealAllCards={isForceRevealAllCards} />
             <PageNavBtn location="end" />
             <Navbar className="buttons">
                 <Container>
                     <Navbar.Brand className="mx-auto">
                         <PageNavBtn location="end" asIcon={true}></PageNavBtn>
-                        <DoneBtn setForceRevealAllCards={setForceRevealAllCards} numOfQuestions={numOfQuestions} />
+                        <DoneBtn
+                            setForceRevealAllCards={setForceRevealAllCards}
+                            numOfQuestions={numOfQuestions}
+                            setLandingMessage={setLandingMessage} />
                     </Navbar.Brand>
                 </Container>
             </Navbar>

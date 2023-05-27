@@ -65,7 +65,36 @@ pub mod test {
     }
 
     #[test]
-    fn ans_test_correct_userans() {
+    fn ans_test_correct_userans_with_cookies() {
+        let client = Client::tracked(rocket()).expect("valid rocket instance");
+        let input = UserInput {
+            force: false,
+            q_num: 1,
+            userans: "my game".to_string(),
+        };
+        let response = client
+            .post(uri!("/ans"))
+            .header(ContentType::JSON)
+            .body(serde_json::to_string(&input).unwrap())
+            .private_cookie(Cookie::new("score", "0"))
+            .private_cookie(Cookie::new(
+                "previously-solved-questions",
+                serde_json::to_string(&Vec::<i32>::new()).unwrap(),
+            ))
+            .dispatch();
+        assert_eq!(
+            response.cookies().get_private("score").unwrap().value(),
+            "1"
+        );
+        let result: Answer = response.into_json().unwrap();
+        assert_eq!(result.possible_answers[0], "My Game");
+        assert_eq!(result.description, "My Descript");
+        assert_eq!(result.release_year, "1982");
+        assert_eq!(result.release_plat, "Plat");
+    }
+
+    #[test]
+    fn ans_test_correct_userans_without_cookies() {
         let client = Client::tracked(rocket()).expect("valid rocket instance");
         let input = UserInput {
             force: false,
@@ -78,12 +107,21 @@ pub mod test {
             .body(serde_json::to_string(&input).unwrap())
             .private_cookie(Cookie::new("score", "0"))
             .dispatch();
-        assert_eq!(response.cookies().get_private("score").unwrap().value(), "1");
-        let result: Answer = response.into_json().unwrap();
-        assert_eq!(result.possible_answers[0], "My Game");
-        assert_eq!(result.description, "My Descript");
-        assert_eq!(result.release_year, "1982");
-        assert_eq!(result.release_plat, "Plat");
+
+        /* both "previously-solved-questions" and "score" cookies should be replaced,
+        because "previously-solved-questions" was missing in the request */
+        assert_eq!(
+            response.cookies().get_private("score").unwrap().value(),
+            "0"
+        );
+        assert_eq!(
+            response
+                .cookies()
+                .get_private("previously-solved-questions")
+                .unwrap()
+                .value(),
+            serde_json::to_string(&Vec::<i32>::new()).unwrap()
+        );
     }
 
     #[test]
@@ -136,9 +174,18 @@ pub mod test {
 
     #[test]
     fn test_is_userans_correct() {
-        let possible_answers: Vec<String> = vec!("First...".to_string(), "Second".to_string());
-        assert_eq!(_is_userans_correct(possible_answers.clone(), "second".to_string()), true);
-        assert_eq!(_is_userans_correct(possible_answers.clone(), "First...".to_string()), true);
-        assert_eq!(_is_userans_correct(possible_answers.clone(), "first".to_string()), false);
+        let possible_answers: Vec<String> = vec!["First...".to_string(), "Second".to_string()];
+        assert_eq!(
+            _is_userans_correct(possible_answers.clone(), "second".to_string()),
+            true
+        );
+        assert_eq!(
+            _is_userans_correct(possible_answers.clone(), "First...".to_string()),
+            true
+        );
+        assert_eq!(
+            _is_userans_correct(possible_answers.clone(), "first".to_string()),
+            false
+        );
     }
 }

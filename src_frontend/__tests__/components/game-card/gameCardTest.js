@@ -28,7 +28,7 @@ afterEach(() => {
 
 describe("unit", () => {
     it("should display the game card", async () => {
-        render(<GameCard ques="q3" isForceRevealAllCards={false} />);
+        render(<GameCard ques="q3" isForceReveal={false} />);
         const card = screen.getByTestId("game-card-q3");
         await waitFor(async () => {
             expect(card).toHaveAttribute("id", "game-card-q3");
@@ -43,7 +43,7 @@ describe("unit", () => {
 
 describe("integration", () => {
     it("should update the card when typing a correct answer in the form", async () => {
-        render(<GameCard ques="q3" isForceRevealAllCards={false} />);
+        render(<GameCard ques="q3" isForceReveal={false} />);
         const skipQuesBtn = screen.getByText("לדלג ולחשוף", { exact: false });
         const form = screen.getByPlaceholderText("המשחק הזה הוא", { exact: false });
         const user = userEvent.setup({ delay: null });
@@ -68,8 +68,8 @@ describe("integration", () => {
         })
     })
 
-    it("should update the card without animating when isForceRevealAllCards is true", async () => {
-        render(<GameCard ques="q3" isForceRevealAllCards={true} />);
+    it("should update the card without animating when isForceReveal is true", async () => {
+        render(<GameCard ques="q3" isForceReveal={true} />);
         const form = screen.getByPlaceholderText("המשחק הזה הוא", { exact: false });
         await waitFor(async () => {
             expect(form).toHaveValue("my-game");
@@ -78,7 +78,7 @@ describe("integration", () => {
     })
 
     it("should update the card when the skip question button is clicked and confirmed", async () => {
-        render(<GameCard ques="q3" isForceRevealAllCards={false} />);
+        render(<GameCard ques="q3" isForceReveal={false} />);
         const form = screen.getByPlaceholderText("המשחק הזה הוא", { exact: false });
         const user = userEvent.setup({ delay: null });
         const skipQuesBtn = screen.getByText("לדלג ולחשוף", { exact: false });
@@ -94,11 +94,11 @@ describe("integration", () => {
             expect(global.HTMLMediaElement.prototype.play).toBeCalled();
             expect(screen.getByTestId("img-id-q3")).toHaveStyle("animation: spin 3s;");
             expect(skipQuesBtn).toHaveClass("invisible");
-        })
+        });
     })
 
     it("should not update the card when the skip question button is clicked yet not confirmed", async () => {
-        render(<GameCard ques="q3" isForceRevealAllCards={false} />);
+        render(<GameCard ques="q3" isForceReveal={false} />);
         const form = screen.getByPlaceholderText("המשחק הזה הוא", { exact: false });
         const user = userEvent.setup({ delay: null });
         const skipQuesBtn = screen.getByText("לדלג ולחשוף", { exact: false });

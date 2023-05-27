@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { ConfirmationModal } from '../modals/confirmationModal.jsx';
 
-export function SkipQuesBtn({ onConfirmAfterthought, className }) {
+export function SkipQuesBtn({ onConfirm, className }) {
     const [skipQuesConfModalState, setSkipQuesConfModalState] = useState({
         "show": false, "isSolved": false, "returnBtnVariant": "secondary", "text":
             <>
@@ -10,7 +10,7 @@ export function SkipQuesBtn({ onConfirmAfterthought, className }) {
                 לא יינתן עבורה ניקוד.
             </>, onConfirm: () => {
                 setSkipQuesConfModalState({ ...skipQuesConfModalState, "show": false, "isSolved": true });
-                onConfirmAfterthought();
+                onConfirm();
             }
     });
 
@@ -22,7 +22,7 @@ export function SkipQuesBtn({ onConfirmAfterthought, className }) {
 
     return (
         <>
-            <Button id="skip-ques-btn" variant="outline-danger" onClick={() => handleSkipQuesBtn()} className={className}>לדלג ולחשוף תשובה</Button>
+            <Button role="skip-ques-btn" variant="outline-danger" onClick={() => handleSkipQuesBtn()} className={className}>לדלג ולחשוף תשובה</Button>
             <ConfirmationModal confModalState={skipQuesConfModalState} setConfModalState={setSkipQuesConfModalState} />
         </>
     );

@@ -58,10 +58,12 @@ describe("unit", () => {
         const mockSetShowSummaryModal = jest.fn();
         const mockSetForceRevealAllCards = jest.fn();
         const mockSetDoneBtnText = jest.fn();
+        const mockSetLandingMessage = jest.fn();
         render(<SummaryModal showSummaryModal={true}
             setShowSummaryModal={mockSetShowSummaryModal}
             setForceRevealAllCards={mockSetForceRevealAllCards}
             setDoneBtnText={mockSetDoneBtnText}
+            setLandingMessage={mockSetLandingMessage}
             numOfQuestions={100} />);
         await waitFor(async () => {
             expect(screen.getByTestId("revealall-btn")).toHaveTextContent("לחזור ולחשוף תשובות");

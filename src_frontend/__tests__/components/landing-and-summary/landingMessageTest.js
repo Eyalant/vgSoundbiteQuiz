@@ -6,14 +6,13 @@ import { LandingMessage } from '../../../components/landing-and-summary/landingM
 
 describe("LandingMessage", () => {
     beforeEach(async () => {
-        render(<LandingMessage />);
+        render(<LandingMessage message={<span>"ברוכות הבאות"</span>} />);
     });
 
     it("should load and display the landing message", async () => {
         await waitFor(async () => {
             expect(screen.getByTestId("logo")).toBeVisible();
             expect(screen.getByText("ברוכות הבאות", { exact: false })).toBeVisible();
-            expect(screen.getByText("בהצלחה", { exact: false })).toBeVisible();
         });
     })
 });
