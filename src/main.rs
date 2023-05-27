@@ -1,5 +1,5 @@
 mod ans_handler;
-mod cookie_gen;
+mod cookie_helper;
 mod io;
 #[cfg(test)]
 mod tests;
@@ -64,8 +64,11 @@ async fn index(cookies: &CookieJar<'_>) -> Template {
     if cookies.get_private("previously-solved-questions").is_none()
         || cookies.get_private("score").is_none()
     {
-        cookie_gen::add_new_initialized_score_cookie(cookies);
-        cookie_gen::add_new_initialized_solved_questions_cookie(cookies);
+        cookie_helper::add_new_initialized_cookie(cookies, "score".to_string());
+        cookie_helper::add_new_initialized_cookie(
+            cookies,
+            "previously-solved-questions".to_string(),
+        );
     }
     let mut context: BTreeMap<&str, Vec<String>> = BTreeMap::new(); // in case I'd need it
     Template::render("index", &context)

@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests;
 
-use crate::cookie_gen;
+use crate::cookie_helper;
 use crate::io::{Answer, RedisPool};
 use deadpool_redis::redis::AsyncCommands;
 use rocket::fs::NamedFile;
@@ -56,7 +56,7 @@ fn _update_user_cookies(cookies: &CookieJar<'_>, question: i32, increase_score: 
                 return; // question was already solved
             }
             solved_questions.push(question);
-            cookie_gen::add_new_cookie(
+            cookie_helper::add_new_custom_cookie(
                 cookies,
                 "previously-solved-questions".to_string(),
                 serde_json::to_string(&solved_questions).unwrap(),
@@ -64,14 +64,11 @@ fn _update_user_cookies(cookies: &CookieJar<'_>, question: i32, increase_score: 
         }
         None => {
             // shouldn't be empty, so get new ones
-            cookie_gen::add_new_cookie(cookies, "score".to_string(), 0.to_string());
-            cookie_gen::add_new_cookie(
+            cookie_helper::add_new_initialized_cookie(cookies, "score".to_string());
+            cookie_helper::add_new_initialized_cookie(
                 cookies,
                 "previously-solved-questions".to_string(),
-                serde_json::to_string(&Vec::<i32>::new()).unwrap(),
             );
-            cookie_gen::add_new_initialized_score_cookie(cookies);
-            cookie_gen::add_new_initialized_solved_questions_cookie(cookies);
             return;
         }
     };
@@ -81,12 +78,19 @@ fn _update_user_cookies(cookies: &CookieJar<'_>, question: i32, increase_score: 
             Some(cookie) => {
                 let mut current_score: i32 = cookie.value().parse().unwrap();
                 current_score += 1;
-                cookie_gen::add_new_cookie(cookies, "score".to_string(), current_score.to_string());
+                cookie_helper::add_new_custom_cookie(
+                    cookies,
+                    "score".to_string(),
+                    current_score.to_string(),
+                );
             }
             None => {
                 // shouldn't be empty, so get new ones
-                cookie_gen::add_new_initialized_score_cookie(cookies);
-                cookie_gen::add_new_initialized_solved_questions_cookie(cookies);
+                cookie_helper::add_new_initialized_cookie(cookies, "score".to_string());
+                cookie_helper::add_new_initialized_cookie(
+                    cookies,
+                    "previously-solved-questions".to_string(),
+                );
                 return;
             }
         };
