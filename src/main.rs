@@ -85,7 +85,7 @@ async fn num_questions(num: &State<i32>) -> Json<NumOfQuestions> {
 async fn score(cookies: &CookieJar<'_>) -> Json<ScoreResp> {
     match cookies.get_private("score") {
         Some(cookie) => {
-            let score: i32 = cookie.value().parse().unwrap();
+            let score: i32 = cookie.value().parse().unwrap_or(0);
             Json(ScoreResp { score })
         }
         None => Json(ScoreResp { score: 0 }),
@@ -98,7 +98,8 @@ async fn solved_questions(cookies: &CookieJar<'_>) -> Json<SolvedQuestionsResp> 
     match cookies.get_private("previously-solved-questions") {
         Some(cookie) => {
             let solved_questions = cookie.value().to_string();
-            let resp: Vec<i32> = serde_json::from_str(&solved_questions).unwrap();
+            let resp: Vec<i32> =
+                serde_json::from_str(&solved_questions).unwrap_or(Vec::<i32>::new());
             Json(SolvedQuestionsResp {
                 solved_questions: resp,
             })
