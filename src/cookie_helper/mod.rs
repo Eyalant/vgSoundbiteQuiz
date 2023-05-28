@@ -18,7 +18,9 @@ pub fn add_new_initialized_cookie(cookies: &CookieJar<'_>, cookie_type: String) 
             add_new_custom_cookie(
                 cookies,
                 "previously-solved-questions".to_string(),
-                serde_json::to_string(&Vec::<i32>::new()).unwrap(),
+                serde_json::to_string(&Vec::<i32>::new()).expect(
+                    "Could not stringify empty vector value in previously-solved-questions cookie",
+                ),
             );
         }
         _ => {}

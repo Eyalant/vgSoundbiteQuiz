@@ -51,7 +51,7 @@ pub fn connect_to_redis() -> Result<redis::Connection, RedisError> {
         var("REDIS_URL").unwrap_or("".into()),
         var("REDIS_PORT").unwrap_or("".into())
     ))
-    .unwrap();
+    .expect("Could not create a Redis client");
     let con = client.get_connection()?;
     return Ok(con);
 }
@@ -88,8 +88,11 @@ pub fn store_answers_in_redis() -> redis::RedisResult<()> {
 
     redis::cmd("FLUSHDB").execute(&mut con); // empty the DB first
     for (k, v) in que_ans_map {
-        let v_json = serde_json::to_string(&v).unwrap();
-        let _: () = con.set(k, v_json).unwrap();
+        let v_json = serde_json::to_string(&v)
+            .expect("Could not serialize an answer while storing answers in Redis");
+        let _: () = con
+            .set(k, v_json)
+            .expect("Could not set an answer while storing answers in Redis");
     }
 
     Ok(())

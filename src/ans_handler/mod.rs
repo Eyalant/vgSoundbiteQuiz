@@ -51,7 +51,7 @@ fn _update_user_cookies(cookies: &CookieJar<'_>, question: i32, increase_score: 
         Some(cookie) => {
             let solved_questions_str = cookie.value().to_string();
             let mut solved_questions: Vec<i32> =
-                serde_json::from_str(&solved_questions_str).unwrap();
+                serde_json::from_str(&solved_questions_str).expect("Could not deserialize solved questions vector");
             if solved_questions.contains(&question) {
                 return; // question was already solved
             }
@@ -59,7 +59,7 @@ fn _update_user_cookies(cookies: &CookieJar<'_>, question: i32, increase_score: 
             cookie_helper::add_new_custom_cookie(
                 cookies,
                 "previously-solved-questions".to_string(),
-                serde_json::to_string(&solved_questions).unwrap(),
+                serde_json::to_string(&solved_questions).expect("Could not stringify solved questions vector"),
             );
         }
         None => {
@@ -76,7 +76,7 @@ fn _update_user_cookies(cookies: &CookieJar<'_>, question: i32, increase_score: 
     if increase_score {
         match cookies.get_private("score") {
             Some(cookie) => {
-                let mut current_score: i32 = cookie.value().parse().unwrap();
+                let mut current_score: i32 = cookie.value().parse().expect("Could not parse score cookie value");
                 current_score += 1;
                 cookie_helper::add_new_custom_cookie(
                     cookies,
