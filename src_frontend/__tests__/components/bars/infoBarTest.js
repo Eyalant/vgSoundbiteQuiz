@@ -22,11 +22,7 @@ describe("InfoBar", () => {
             expect(screen.getByRole("info-bar-container")).toHaveTextContent("אני גם פה");
             expect(screen.getByTestId("ns-icon")).toBeVisible();
             let links = screen.getAllByRole("link");
-            expect(links[0]).toHaveAttribute("href", "https://twitter.com/Giggsy42");
-            expect(links[1]).toHaveAttribute("href", "https://www.facebook.com/beyond.screen");
-            expect(links[2]).toHaveAttribute("href", "https://twitter.com/GamebdaysHeb");
-            expect(links[3]).toHaveAttribute("href", "https://account.xbox.com/en-us/profile?gamertag=bhaalspawn42");
-            expect(links[4]).toHaveAttribute("href", "https://steamcommunity.com/id/SpawnOfBhaal");
+            expect(links[0]).toHaveAttribute("href", "https://bhaal.substack.com/");
         });
     });
 
