@@ -1,4 +1,4 @@
-[This is an SPA quiz](https://game-sounds.quest) in which the user tries to recognize famous video games based on short soundbites taken from them.
+[This is an SPA quiz](https://videogamesoundbites.onrender.com/) in which the user tries to recognize famous video games based on short soundbites taken from them.
 
 I wrote this because I thought it was a nice entrypoint to writing my first Rust and Reactjs code.
 
